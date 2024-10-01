@@ -23,11 +23,10 @@ h1 {
 
 canvas {
     background-color: #34495e;
-    border: 15px solid #e8dbb0;
-    width: 80vw; /* Set to 80% of the viewport width */
-    height: 80vh; /* Set to 80% of the viewport height */
-    max-width: 450px; /* Max width to prevent getting too large */
-    max-height: 450px;
+    border: 15px solid #e8dbb0; /* Set to 80% of the viewport width */
+     /* Set to 80% of the viewport height */
+    max-width: 400px; /* Max width to prevent getting too large */
+    max-height: 400px;
     margin: 20px;
     padding: 5px;
     box-sizing: border-box; /* Ensures padding and margin are included in size calculations */
@@ -58,7 +57,7 @@ canvas {
         padding: 5px; /* Reduce padding on small screens */
     }
     canvas {
-        width: 90vw; /* Ensure canvas doesn't take up the entire width */
+        width: 60vw; /* Ensure canvas doesn't take up the entire width */
         height: 65vh; /* Adjust height for better spacing */
         margin: 10px; /* Reduce margin for smaller screens */
         padding: 5px; /* Padding to prevent edge touches */
@@ -75,7 +74,7 @@ canvas {
         padding: 5px; /* Reduce padding for small screens */
     }
     canvas {
-        width: 85vw; /* Slightly reduce the width for very small screens */
+        width: 70vw; /* Slightly reduce the width for very small screens */
         height: 60vh; /* Adjust height to fit smaller screens */
         margin: 5px;
         padding: 5px; /* Padding to ensure it stays away from the edge */
