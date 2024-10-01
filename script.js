@@ -1,5 +1,5 @@
 (function() {
-    var SIZE = 500; // Size of the field
+    var SIZE = 400; // Size of the field
     var GRID_SIZE = SIZE / 50;
     var field = document.getElementById('field');
     field.height = field.width = SIZE * 2; // 2x our resolution
