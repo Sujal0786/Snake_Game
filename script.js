@@ -129,3 +129,10 @@
         window.addEventListener('touchmove', handleTouchMove, false);
     };
 })();
+
+// Get the canvas element
+var canvas = document.getElementById('field');
+
+// Set the canvas width and height based on the CSS values
+canvas.width = canvas.offsetWidth;
+canvas.height = canvas.offsetHeight;
