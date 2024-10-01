@@ -31,6 +31,10 @@ canvas {
     margin: 20px;
     padding: 5px;
     box-sizing: border-box; /* Ensures padding and margin are included in size calculations */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
 }
 
 /* Media queries for tablets and smaller screens */
