@@ -21,17 +21,17 @@ h1 {
 
 canvas {
     background-color: #34495e;
-    border: 2px solid #e8dbb0;
+    border: 25px solid #e8dbb0;
     width: 80vw; /* Set the width to 80% of the viewport width */
     height: 80vh; /* Set the height to 80% of the viewport height */
-    max-width: 500px; /* Set a maximum width to prevent the canvas from getting too large */
-    max-height: 500px; /* Set a maximum height to prevent the canvas from getting too large */
+    max-width: 450px; /* Set a maximum width to prevent the canvas from getting too large */
+    max-height: 450px; /* Set a maximum height to prevent the canvas from getting too large */
     margin: 20px; /* Add some margin to prevent overlapping with screen edges */
     box-sizing: border-box; /* Ensure the margin is included in the width and height calculations */
 }
 
 /* Media queries for smaller screens */
-@media (max-width: 600px) {
+@media (max-width: 800px) {
     h1 {
         font-size: 36px;
     }
