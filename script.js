@@ -1,6 +1,7 @@
-(function() {
+(function () {
     var field = document.getElementById('field');
     var ctx = field.getContext('2d');
+    var resetButton = document.getElementById('reset-btn');
 
     // Dynamically calculate SIZE based on the CSS size
     var SIZE = Math.min(field.offsetWidth, field.offsetHeight); // Use the smaller of width or height
@@ -22,7 +23,7 @@
     }
 
     function coordToString(obj) {
-        return [obj.x, obj.y].join(',');
+        return [Math.round(obj.x), Math.round(obj.y)].join(','); // Round to avoid floating-point issues
     }
 
     function tick() {
@@ -40,7 +41,7 @@
         }
 
         // Detect if the head is in the same cell as the food
-        if (food && food.x === snakePart.x && food.y === snakePart.y) {
+        if (food && Math.round(food.x) === Math.round(snakePart.x) && Math.round(food.y) === Math.round(snakePart.y)) {
             food = null;
             snakeLength += 10;
             score++;
@@ -54,13 +55,11 @@
             ctx.textAlign = 'center';
             ctx.fillText('Game Over - Score: ' + score, SIZE / 2, SIZE / 2);
             ctx.fillText('SPACE to continue', SIZE / 2, SIZE / 2 + 30);
-            if (newDirection == 5) {
-                location.reload();
-            }
+            return;
         } else {
             snake.unshift(snakePart); // Add a new head to the front
             snake = snake.slice(0, snakeLength);
-            ctx.fillStyle = '#e8dbb0'; // score
+            ctx.fillStyle = '#e8dbb0'; // Score text
             ctx.font = '20px Monospace';
             ctx.fillText('Score:' + score, 5, 20);
         }
@@ -75,8 +74,7 @@
         for (var i = 0; i < snake.length; i++) {
             var a = snake[i];
             ctx.fillRect(a.x, a.y, GRID_SIZE - 1, GRID_SIZE - 1); // Paint the snake
-            // Build a collision lookup object
-            if (i > 0) snakeObj[coordToString(a)] = true;
+            if (i > 0) snakeObj[coordToString(a)] = true; // Build a collision lookup object
         }
 
         if (snakeObj[coordToString(snakePart)]) end = true; // Collided with the snake tail
@@ -121,10 +119,22 @@
         touchStartY = 0;
     }
 
-    window.onload = function() {
+    function resetGame() {
+        snakeLength = 5;
+        snake = [{ x: SIZE / 2, y: SIZE / 2 }];
+        direction = newDirection = 1;
+        food = null;
+        end = false;
+        score = 0;
+    }
+
+    window.onload = function () {
         setInterval(tick, 100); // Start the game loop
-        window.onkeydown = function(e) {
-            newDirection = { 37: -1, 38: -2, 39: 1, 40: 2, 32: 5 }[e.keyCode] || newDirection; // 32 = 5 for space restart
+        window.onkeydown = function (e) {
+            newDirection = { 37: -1, 38: -2, 39: 1, 40: 2, 32: 5 }[e.keyCode] || newDirection;
+            if (e.keyCode == 32 && end) { // Restart on space press after game over
+                resetGame();
+            }
         };
 
         // Add touch event listeners for mobile
@@ -132,11 +142,16 @@
         window.addEventListener('touchmove', handleTouchMove, false);
 
         // Handle window resizing
-        window.onresize = function() {
+        window.onresize = function () {
             SIZE = Math.min(field.offsetWidth, field.offsetHeight);
             GRID_SIZE = SIZE / 50;
             field.width = field.height = SIZE * 2;
             ctx.scale(2, 2);
+        };
+
+        // Reset button functionality
+        resetButton.onclick = function () {
+            resetGame();
         };
     };
 })();
