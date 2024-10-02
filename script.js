@@ -1,11 +1,14 @@
 (function() {
-    var SIZE = 400; // Size of the field
-    var GRID_SIZE = SIZE / 50;
     var field = document.getElementById('field');
-    field.height = field.width = SIZE * 2; // 2x our resolution
-    field.style.width = field.style.height = SIZE + 'px';
     var ctx = field.getContext('2d');
-    ctx.scale(2, 2); // Scale the canvas
+
+    // Dynamically calculate SIZE based on the CSS size
+    var SIZE = Math.min(field.offsetWidth, field.offsetHeight); // Use the smaller of width or height
+    var GRID_SIZE = SIZE / 50;
+
+    // Adjust canvas size based on device screen size
+    field.height = field.width = SIZE * 2; // 2x resolution
+    ctx.scale(2, 2); // Scale the canvas for higher resolution
 
     var direction = newDirection = 1; // -2: up, 2: down, -1: left, 1: right
     var snakeLength = 5;
@@ -50,7 +53,7 @@
             ctx.font = '30px Monospace';
             ctx.textAlign = 'center';
             ctx.fillText('Game Over - Score: ' + score, SIZE / 2, SIZE / 2);
-            ctx.fillText('SPACE to continue', SIZE / 2, 300);
+            ctx.fillText('SPACE to continue', SIZE / 2, SIZE / 2 + 30);
             if (newDirection == 5) {
                 location.reload();
             }
@@ -123,16 +126,17 @@
         window.onkeydown = function(e) {
             newDirection = { 37: -1, 38: -2, 39: 1, 40: 2, 32: 5 }[e.keyCode] || newDirection; // 32 = 5 for space restart
         };
-        
+
         // Add touch event listeners for mobile
         window.addEventListener('touchstart', handleTouchStart, false);
         window.addEventListener('touchmove', handleTouchMove, false);
+
+        // Handle window resizing
+        window.onresize = function() {
+            SIZE = Math.min(field.offsetWidth, field.offsetHeight);
+            GRID_SIZE = SIZE / 50;
+            field.width = field.height = SIZE * 2;
+            ctx.scale(2, 2);
+        };
     };
 })();
-
-// Get the canvas element
-var canvas = document.getElementById('field');
-
-// Set the canvas width and height based on the CSS values
-canvas.width = canvas.offsetWidth;
-canvas.height = canvas.offsetHeight;
