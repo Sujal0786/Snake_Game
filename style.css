@@ -7,60 +7,73 @@ body, html {
     align-items: center;
     background-color: #2c3e50;
     font-family: 'Arial', sans-serif;
-    box-sizing: border-box;
-    overflow: hidden; /* Prevents scrolling */
+    overflow: hidden; /* Prevents screen scrolling */
 }
 
 h1 {
     color: #f2d729;
     font-size: 48px;
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     text-shadow: 3px 3px 0px #15b31b, 6px 6px 0px #34495e;
 }
 
 canvas {
     background-color: #34495e;
-    border: 10px solid #e8dbb0;
-    width: 90vw; /* Set to 90% of the viewport width */
-    height: 90vw; /* Maintain aspect ratio for height */
-    max-width: 450px; /* Maximum size limit */
-    max-height: 450px;
+    border: 15px solid #e8dbb0;
+    width: 450px;
+    height: 450px;
     box-sizing: border-box;
     display: block;
-    margin: 0 auto; /* Center the canvas */
+    margin: 0 auto;
 }
 
-/* Handles responsive design for larger devices */
-@media (min-width: 1024px) {
-    canvas {
-        width: 450px; /* Fix the size for large screens */
-        height: 450px;
-    }
-}
-
-/* Media query for smaller devices (phones and tablets) */
-@media (max-width: 768px) {
+/* Ensures the game fits well in mobile, tablet, and desktop */
+@media (max-width: 1024px) {
     h1 {
         font-size: 36px;
     }
     canvas {
         width: 80vw;
         height: 80vw;
+        max-width: 450px;
+        max-height: 450px;
+    }
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 28px;
+    }
+    canvas {
+        width: 90vw;
+        height: 90vw;
         max-width: 400px;
         max-height: 400px;
     }
 }
 
-/* Media query for very small devices */
 @media (max-width: 480px) {
     h1 {
-        font-size: 28px;
+        font-size: 24px;
     }
     canvas {
-        width: 95vw; /* Slightly increase width for better visibility */
+        width: 95vw;
         height: 95vw;
         max-width: 350px;
         max-height: 350px;
+    }
+}
+
+/* Handles very small screens */
+@media (max-width: 320px) {
+    h1 {
+        font-size: 20px;
+    }
+    canvas {
+        width: 90vw;
+        height: 90vw;
+        max-width: 320px;
+        max-height: 320px;
     }
 }
